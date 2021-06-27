@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace MVC_Conway.Common
 {
     /// <summary>
