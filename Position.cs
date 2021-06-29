@@ -16,6 +16,26 @@ namespace MVC_Conway.Common
         /// </summary>
         public byte Column { get; private set;}
 
+        /// <summary>
+        /// Property that represents cell above
+        /// </summary>
+        public int TopCellPos { get; private set; }
+
+        /// <summary>
+        /// Property that represents cell below
+        /// </summary>
+        public int BotCellPos { get; private set; }
+
+        /// <summary>
+        /// Property that represents the left cell
+        /// </summary>
+        public int LeftCellPos { get; private set; }
+
+        /// <summary>
+        /// Property that represents the right cell
+        /// </summary>
+        public int RightCellPos { get; private set; }
+
 
         /// <summary>
         /// Contructor for the Position Class
@@ -26,6 +46,10 @@ namespace MVC_Conway.Common
         {
             Row = row;
             Column = column;
+            TopCellPos = column + 1;
+            BotCellPos = column - 1;
+            LeftCellPos = row - 1;
+            RightCellPos = row + 1;
         }
     }
 }

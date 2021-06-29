@@ -13,7 +13,7 @@ namespace MVC_Conway.Common
         /// Property used to save all the cells
         /// in the simulation
         /// </summary>
-        public ICollection<Cell> CellGroup { get; private set;}
+        public IList<Cell> CellGroup { get; private set;}
 
         /// <summary>
         /// Property used to acess the maximum
@@ -41,6 +41,10 @@ namespace MVC_Conway.Common
             MaxColumn = maxCollumn;
         }
 
+        /// <summary>
+        /// Method used to place a cell per position
+        /// based on the max rows and columns defined
+        /// </summary>
         public void GridSetup()
         {
             Cell tempCell;

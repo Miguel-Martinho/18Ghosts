@@ -31,7 +31,12 @@ namespace MVC_Conway.Common
             CellType = TypeGenerator();
         }
 
-        private CellType TypeGenerator()
+        /// <summary>
+        /// Method used to randomly assign a CellType
+        /// to a cell using a random number
+        /// </summary>
+        /// <returns></returns>
+        public CellType TypeGenerator()
         {
             int cellTypeValue;
             rng = new Random();
@@ -48,12 +53,10 @@ namespace MVC_Conway.Common
                     return CellType.Scissors;
 
                 default:
-                    return CellType.Empty;     
+                    return CellType.Empty;
             }
 
         }
-
-
 
     }
 }
