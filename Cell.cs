@@ -17,7 +17,7 @@ namespace MVC_Conway.Common
         /// <summary>
         /// Property used to save the cell's type
         /// </summary>
-        public CellType CellType { get; private set; }
+        public CellType CellType { get; set; }
 
         private Random rng;
         /// <summary>

@@ -9,32 +9,32 @@ namespace MVC_Conway.Common
         /// <summary>
         /// Property that represents the row value
         /// </summary>
-        public byte Row { get; private set;}
+        public short Row { get; private set;}
 
         /// <summary>
         /// Property that represents the column value
         /// </summary>
-        public byte Column { get; private set;}
+        public short Column { get; private set;}
 
         /// <summary>
         /// Property that represents cell above
         /// </summary>
-        public int TopCellPos { get; private set; }
+        public short TopCellPos { get; private set; }
 
         /// <summary>
         /// Property that represents cell below
         /// </summary>
-        public int BotCellPos { get; private set; }
+        public short BotCellPos { get; private set; }
 
         /// <summary>
         /// Property that represents the left cell
         /// </summary>
-        public int LeftCellPos { get; private set; }
+        public short LeftCellPos { get; private set; }
 
         /// <summary>
         /// Property that represents the right cell
         /// </summary>
-        public int RightCellPos { get; private set; }
+        public short RightCellPos { get; private set; }
 
 
         /// <summary>
@@ -42,14 +42,14 @@ namespace MVC_Conway.Common
         /// </summary>
         /// <param name="row">Cell's Row Value</param>
         /// <param name="column">Cell's Column Value</param>
-        public Position(byte row, byte column)
+        public Position(short row, short column)
         {
             Row = row;
             Column = column;
-            TopCellPos = column + 1;
-            BotCellPos = column - 1;
-            LeftCellPos = row - 1;
-            RightCellPos = row + 1;
+            TopCellPos = (short)(column + 1);
+            BotCellPos = (short)(column - 1);
+            LeftCellPos = (short)(row - 1);
+            RightCellPos = (short)(row + 1);
         }
     }
 }

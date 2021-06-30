@@ -30,6 +30,7 @@ namespace MVC_Conway.Common
         private Cell c1;
         private Cell c2;
 
+
         /// <summary>
         /// Constructor for the CellEvent class
         /// </summary>
@@ -41,26 +42,116 @@ namespace MVC_Conway.Common
             CellGroup = cellGroup;
         }
 
+        /// <summary>
+        /// Method used to "swicth" the cells types
+        /// "moving" them along the simulation
+        /// </summary>
         public void Movement()
         {
-
+            CellSelector();
+            Cell tempCell = c1;
+            c1.CellType = c2.CellType;
+            c2.CellType = tempCell.CellType;
         }
 
+        /// <summary>
+        /// Two random cells are selected
+        /// and "Figth" accordingly with the rules
+        /// of "Rock, Paper, Scissors"
+        /// </summary>
         public void Fight()
         {
+            ///Method seletects two random cells
+            ///from te group
+            CellSelector();
 
+            ///Switch cased used to compare the 1st
+            ///selected cell's type with the 2nd
+            ///one. It compares both values and
+            ///decides the "loser" using the rules
+            ///of "Rock, Paper, Scissors".
+            ///The loser becomes an empty cell;
+            switch (c1.CellType)
+            {
+
+                case CellType.Rock:
+                    if (c2.CellType == CellType.Scissors)
+                    {
+
+                        c1.CellType = CellType.Empty;
+                        break;
+                    }
+                    else if (c2.CellType == CellType.Paper)
+                    {
+                        c2.CellType = CellType.Empty;
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                case CellType.Paper:
+                    if (c2.CellType == CellType.Scissors)
+                    {
+                        c1.CellType = CellType.Empty;
+                        break;
+                    }
+                    else if (c2.CellType == CellType.Rock)
+                    {
+                        c1.CellType = CellType.Empty;
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                case CellType.Scissors:
+                    if (c2.CellType == CellType.Rock)
+                    {
+                        c1.CellType = CellType.Empty;
+                        break;
+                    }
+                    else if (c2.CellType == CellType.Paper)
+                    {
+                        c2.CellType = CellType.Empty;
+                        break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+
+                default:
+                    break;
+            }
         }
 
+        /// <summary>
+        /// Method used to multiply the number of
+        /// cells using its type. If one of the chosen
+        /// cells is of the Empty type, it changes
+        /// its type to the neighbourcell
+        /// </summary>
         public void Reproduce()
         {
-
+            CellSelector();
+            if (c1.CellType == CellType.Empty ||
+                c2.CellType == CellType.Empty)
+            {
+                if (c1.CellType == CellType.Empty)
+                    c1.CellType = c2.CellType;
+                else
+                    c2.CellType = c1.CellType;
+            }
         }
 
         /// <summary>
         /// Method used to select two random cells
         /// from the simulation
         /// </summary>
-        public void CellSelector()
+        private void CellSelector()
         {
             //Variables used to randomly select 
             //the cells
@@ -80,7 +171,7 @@ namespace MVC_Conway.Common
                 ///If the 2nd random value is 1
                 ///it will select the top neighbour
                 ///cell
-                if (tempCell.CellPos.Column == 
+                if (tempCell.CellPos.Column ==
                     c1.CellPos.TopCellPos
                     && c2Selector == 1)
                     c2 = tempCell;
@@ -88,7 +179,7 @@ namespace MVC_Conway.Common
                 ///If the 2nd random value is 2
                 ///it will select the bottom
                 ///neighbour cell
-                else if (tempCell.CellPos.Column 
+                else if (tempCell.CellPos.Column
                     == c1.CellPos.BotCellPos
                     && c2Selector == 2)
                     c2 = tempCell;
@@ -96,7 +187,7 @@ namespace MVC_Conway.Common
                 ///If the 2nd random value is 3
                 ///it will select the left neighbour
                 ///cell
-                else if (tempCell.CellPos.Row 
+                else if (tempCell.CellPos.Row
                     == c1.CellPos.LeftCellPos
                     && c2Selector == 3)
                     c2 = tempCell;
@@ -104,12 +195,13 @@ namespace MVC_Conway.Common
                 ///If the 2nd random value is 1
                 ///it will select the right neighbour
                 ///cell
-                else if (tempCell.CellPos.Row 
+                else if (tempCell.CellPos.Row
                     == c1.CellPos.RightCellPos
                     && c2Selector == 4)
                     c2 = tempCell;
 
             }
         }
+
     }
 }

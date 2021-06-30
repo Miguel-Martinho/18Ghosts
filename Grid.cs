@@ -19,24 +19,21 @@ namespace MVC_Conway.Common
         /// Property used to acess the maximum
         /// dimensions of the grid's rows
         /// </summary>
-        public byte MaxRows { get; private set;}
+        public short MaxRows { get; private set;}
 
         /// <summary>
         /// Property used to acess the maximum
         /// dimensions of the grid's collumns
         /// </summary>
-        public byte MaxColumn { get; private set; }
-
-
+        public short MaxColumn { get; private set; }
 
         /// <summary>
         /// Constructor for the Grid class
         /// </summary>
         /// <param name="cellGroup">Collection of
         /// cell's in the simulation</param>
-        public Grid(byte maxRow, byte maxCollumn) 
+        public Grid(short maxRow, short maxCollumn) 
         {
-           
             MaxRows = maxRow;
             MaxColumn = maxCollumn;
         }
@@ -57,5 +54,6 @@ namespace MVC_Conway.Common
                 }
             }
         }
+
     }
 }
