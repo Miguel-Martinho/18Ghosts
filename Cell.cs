@@ -10,7 +10,7 @@ namespace MVC_Conway.Common
     {
 
         /// <summary>
-        /// Prperty used to save the cell's position
+        /// Property used to save the cell's position
         /// </summary>
         public Position CellPos { get; private set; }
 

@@ -29,7 +29,7 @@ namespace MVC_Conway.Common
 
         /// <summary>
         /// Variables used to represent the number
-        /// of times each type of event is gona
+        /// of times each type of event is going to
         /// happen during the current turn
         /// </summary>
         private int numMovement, numFights, numReproduce;
@@ -129,7 +129,7 @@ namespace MVC_Conway.Common
 
         /// <summary>
         /// Method used to add a certain event too
-        /// the coçççection based on the randomçy
+        /// the connection based on the randomly
         /// generated numbers for each type
         /// </summary>
         private void AddEventToList()

@@ -43,7 +43,7 @@ namespace MVC_Conway.Common
         }
 
         /// <summary>
-        /// Method used to "swicth" the cells types
+        /// Method used to "switch" the cells types
         /// "moving" them along the simulation
         /// </summary>
         public void Movement()
@@ -56,12 +56,12 @@ namespace MVC_Conway.Common
 
         /// <summary>
         /// Two random cells are selected
-        /// and "Figth" accordingly with the rules
+        /// and "Fight" accordingly with the rules
         /// of "Rock, Paper, Scissors"
         /// </summary>
         public void Fight()
         {
-            ///Method seletects two random cells
+            ///Method selects two random cells
             ///from te group
             CellSelector();
 

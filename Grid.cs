@@ -5,7 +5,7 @@ using System.Text;
 namespace MVC_Conway.Common
 {
     /// <summary>
-    /// Class that represnts the simulation grid
+    /// Class that represents the simulation grid
     /// </summary>
     public class Grid
     {
@@ -16,14 +16,14 @@ namespace MVC_Conway.Common
         public IList<Cell> CellGroup { get; private set;}
 
         /// <summary>
-        /// Property used to acess the maximum
+        /// Property used to access the maximum
         /// dimensions of the grid's rows
         /// </summary>
         public short MaxRows { get; private set;}
 
         /// <summary>
-        /// Property used to acess the maximum
-        /// dimensions of the grid's collumns
+        /// Property used to access the maximum
+        /// dimensions of the grid's columns
         /// </summary>
         public short MaxColumn { get; private set; }
 
@@ -32,10 +32,10 @@ namespace MVC_Conway.Common
         /// </summary>
         /// <param name="cellGroup">Collection of
         /// cell's in the simulation</param>
-        public Grid(short maxRow, short maxCollumn) 
+        public Grid(short maxRow, short maxColumn) 
         {
             MaxRows = maxRow;
-            MaxColumn = maxCollumn;
+            MaxColumn = maxColumn;
         }
 
         /// <summary>

@@ -1,6 +1,6 @@
 using System;
 
-namespace Common
+namespace MVC_Conway.Common
 {
     /// <summary>
     /// Class that contains the games parameters
@@ -12,6 +12,7 @@ namespace Common
         public float swap_rate_exp {get; private set;}
         public float repr_rate_exp {get; private set;}
         public float selc_rate_exp {get; private set;}
+        public bool validParam {get; private set;}
         /// <summary>
         /// Constructor for Parameters class
         /// </summary>
@@ -33,9 +34,19 @@ namespace Common
         {
             xdim = xdimension;
             ydim = ydimension;
+            
+            validParam = CheckValue(_swap_rate_exp);
             swap_rate_exp = _swap_rate_exp;
+            validParam = CheckValue(_repr_rate_exp);
             repr_rate_exp = _repr_rate_exp;
+            validParam = CheckValue(_selc_rate_exp);
             selc_rate_exp = _selc_rate_exp;
+        }
+        private bool CheckValue(float value)
+        {
+        if (value < -1.0f || value > 1.0f)
+            return false;
+        return true;
         }
     }
 }

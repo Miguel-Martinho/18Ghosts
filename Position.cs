@@ -38,7 +38,7 @@ namespace MVC_Conway.Common
 
 
         /// <summary>
-        /// Contructor for the Position Class
+        /// Constructor for the Position Class
         /// </summary>
         /// <param name="row">Cell's Row Value</param>
         /// <param name="column">Cell's Column Value</param>
