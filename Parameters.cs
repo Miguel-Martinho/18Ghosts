@@ -7,12 +7,12 @@ namespace MVC_Conway.Common
     /// </summary>
     public class Parameters
     {
-        public short xdim {get; private set;}
-        public short ydim {get; private set;}
-        public float swap_rate_exp {get; private set;}
-        public float repr_rate_exp {get; private set;}
-        public float selc_rate_exp {get; private set;}
-        public bool validParam {get; private set;}
+        public short Xdim {get; private set;}
+        public short Ydim {get; private set;}
+        public float Move_rate_exp {get; private set;}
+        public float Rep_rate_exp {get; private set;}
+        public float Fight_rate_exp {get; private set;}
+        public bool ValidParam {get; private set;}
         /// <summary>
         /// Constructor for Parameters class
         /// </summary>
@@ -32,15 +32,15 @@ namespace MVC_Conway.Common
                 float _repr_rate_exp,
                 float _selc_rate_exp)
         {
-            xdim = xdimension;
-            ydim = ydimension;
+            Xdim = xdimension;
+            Ydim = ydimension;
             
-            validParam = CheckValue(_swap_rate_exp);
-            swap_rate_exp = _swap_rate_exp;
-            validParam = CheckValue(_repr_rate_exp);
-            repr_rate_exp = _repr_rate_exp;
-            validParam = CheckValue(_selc_rate_exp);
-            selc_rate_exp = _selc_rate_exp;
+            ValidParam = CheckValue(_swap_rate_exp);
+            Move_rate_exp = _swap_rate_exp;
+            ValidParam = CheckValue(_repr_rate_exp);
+            Rep_rate_exp = _repr_rate_exp;
+            ValidParam = CheckValue(_selc_rate_exp);
+            Fight_rate_exp = _selc_rate_exp;
         }
         private bool CheckValue(float value)
         {

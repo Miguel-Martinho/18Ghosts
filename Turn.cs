@@ -24,6 +24,7 @@ namespace MVC_Conway.Common
         /// simulation's grid
         /// </summary>
         private Grid simGrid { get; }
+        private Parameters parameters {get;}
 
         private Random rng;
 
@@ -33,14 +34,6 @@ namespace MVC_Conway.Common
         /// happen during the current turn
         /// </summary>
         private int numMovement, numFights, numReproduce;
-
-        /// <summary>
-        /// Variables used to represent the odds
-        /// of each event getting selected to be
-        /// added to the collection
-        /// </summary>
-        private int mov_rate_exp, fight_rate_exp,
-                    rep_rate_exp;
 
         /// <summary>
         /// Variable used in the Poisson method
@@ -53,37 +46,28 @@ namespace MVC_Conway.Common
         /// <param name="grid">Grid used in the 
         /// simulation</param>
         /// <param name="cEvent"></param>
-        /// <param name="x">Value that represents 
-        /// the movement event rate</param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        public Turn(Grid grid, CellEvent cEvent, 
-                int x = 0, int y = 0, int z = 0)
+        public Turn(Grid grid, CellEvent cEvent)
         {
             rng = new Random();
 
             cellEvent = cEvent;
             simGrid = grid;
 
-            mov_rate_exp = x;
             lambda = (simGrid.MaxRows * 
                 simGrid.MaxColumn / 3.0) * 
-                Math.Pow(10, mov_rate_exp);
+                Math.Pow(10, parameters.Move_rate_exp);
 
             numMovement = Poisson(lambda);
 
-            fight_rate_exp = y;
-
             lambda = (simGrid.MaxRows * 
                 simGrid.MaxColumn / 3.0) * 
-                Math.Pow(10, fight_rate_exp);
+                Math.Pow(10, parameters.Fight_rate_exp);
 
             numFights = Poisson(lambda);
 
-            rep_rate_exp = z;
             lambda = (simGrid.MaxRows * 
                 simGrid.MaxColumn / 3.0) * 
-                Math.Pow(10, rep_rate_exp);
+                Math.Pow(10, parameters.Rep_rate_exp);
 
             numReproduce = Poisson(lambda);
         }

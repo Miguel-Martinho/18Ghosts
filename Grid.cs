@@ -34,6 +34,7 @@ namespace MVC_Conway.Common
         /// cell's in the simulation</param>
         public Grid(short maxRow, short maxColumn) 
         {
+            CellGroup = new List<Cell>();
             MaxRows = maxRow;
             MaxColumn = maxColumn;
         }
