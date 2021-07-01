@@ -50,7 +50,7 @@ namespace MVC_Conway.Common
             {
                 for (byte j = 0; j < MaxColumn; j++)
                 {
-                    tempCell = new Cell(new Position(i, j));
+                    tempCell = new Cell(new Position(i, j, MaxRows, MaxColumn));
                     CellGroup.Add(tempCell);
                 }
             }

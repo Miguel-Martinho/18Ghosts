@@ -46,12 +46,13 @@ namespace MVC_Conway.Common
         /// <param name="grid">Grid used in the 
         /// simulation</param>
         /// <param name="cEvent"></param>
-        public Turn(Grid grid, CellEvent cEvent)
+        public Turn(Grid grid, Parameters parameters)
         {
+            eventList = new List<CellEventTypes>();
             rng = new Random();
 
-            cellEvent = cEvent;
             simGrid = grid;
+            cellEvent = new CellEvent(simGrid.CellGroup);
 
             lambda = (simGrid.MaxRows * 
                 simGrid.MaxColumn / 3.0) * 
@@ -70,6 +71,8 @@ namespace MVC_Conway.Common
                 Math.Pow(10, parameters.Rep_rate_exp);
 
             numReproduce = Poisson(lambda);
+
+            AddEventToList();
         }
 
         /// <summary>

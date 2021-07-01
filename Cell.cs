@@ -40,7 +40,7 @@ namespace MVC_Conway.Common
         {
             int cellTypeValue;
             rng = new Random();
-            cellTypeValue = rng.Next(1, 3);
+            cellTypeValue = rng.Next(1, 5);
 
             switch (cellTypeValue)
             {
