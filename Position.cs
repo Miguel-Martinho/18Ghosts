@@ -26,5 +26,21 @@ namespace Ghosts.Common
             Row = row;
             Column = column;
         }
+        public PortalDirections GetDirection(Position position1, Position position2)
+        {
+            Position result = new Position((short)(position1.Row - position2.Row),
+             (short)(position1.Column - position2.Column));
+
+            if(result.Row == 1)
+                return PortalDirections.Right;
+
+            else if (result.Row == -1)
+                return PortalDirections.Left;
+
+            else if(result.Column == 1)
+                return PortalDirections.Up;
+            else
+                return PortalDirections.Down;
+        }
     }
 }

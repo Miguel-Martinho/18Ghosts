@@ -8,11 +8,14 @@ namespace Ghosts.Common
 
         public byte Player { get; private set;}
 
-        public Ghost(Position pos, 
-            Color col, byte player)
+        private Position temppos;
+
+        public Ghost(CarpetTile tile,
+         byte player)
         {
-            Pos = pos;
-            Color = col;
+            temppos = new Position();
+            Pos = tile.TilePos;
+            Color = tile.Color;
             Player = player;
         }
 
@@ -20,14 +23,20 @@ namespace Ghosts.Common
         /// Method used to move the ghost from its
         /// current position into an empty tile
         /// </summary>
-        public void Movement(ITile tile)
+        public void Movement(Tile tile)
         {
             
             if(tile.TileType == TileType.Portal)
             {
-                GetMoveDirection();
+                if (tile.Direction == Pos.GetDirection(Pos, tile.TilePos) -2)
+                {
+                    //Ghost escape
+                }
+                else 
+                {
+                    //dont move there
+                }
             }
-            this.Pos = pos;
         }
 
         /// <summary>
@@ -39,11 +48,5 @@ namespace Ghosts.Common
 
 
         }
-
-        private void GetMoveDirection()
-        {
-
-        }
-
     }
 }

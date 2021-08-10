@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Ghosts.Common
 {
-    public class PortalTile : ITile
+    public class PortalTile : Tile
     {
-        public Position TilePos { get; private set; }
+        public override Position TilePos { get;}
 
-        public TileType TileType { get; private set; }
+        public override TileType TileType { get;}
 
-        public Color Color { get; private set; }
+        public override Color Color { get;}
 
-        public PortalDirections Direction { get; private set; }
+        public override PortalDirections Direction { get; protected set; }
 
         public PortalTile(Position pos, Color color,
             PortalDirections dir)

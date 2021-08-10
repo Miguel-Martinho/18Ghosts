@@ -6,18 +6,17 @@ namespace Ghosts.Common
 {
     public class Turn
     {
-        public IList<Ghost> Player1Ghosts { get; private set; }
+        public IList<Ghost> Ghosts {get; private set;}
 
-        public IList<Ghost> Player2Ghosts { get; private set; }
+        public byte CurrentPlayer { get; private set; }
 
-        public short CurrentPlayer { get; private set; }
-
-        public void PlaceGhost(ITile tile, short player)
+        public void PlaceGhost(Tile tile, byte player)
         {
+            Ghost tempGhost; 
             if (tile.TileType != TileType.Carpet)
-                throw new NotImplementedException
+                throw new NotImplementedException();
             else
-            Ghost tempGhost = new Ghost (tile.TilePos, tile.TileType. player)
+                tempGhost = new Ghost (tile as CarpetTile, player);
         }
 
         public void ChangeCurrentPlayer()
@@ -26,12 +25,5 @@ namespace Ghosts.Common
             else
                 CurrentPlayer = 1;
         }
-            new
-        SelectGhost
-            Move
-
-            Fight
-
-        RespawnGhost
     }
 }

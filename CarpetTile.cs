@@ -4,15 +4,15 @@ using System.Text;
 
 namespace Ghosts.Common
 {
-    public class CarpetTile : ITile
+    public class CarpetTile : Tile
     {
-        public Position TilePos { get; private set;}
+        public override Position TilePos { get;}
 
-        public TileType TileType { get; private set; }
+        public override TileType TileType { get;}
 
-        public Color Color { get; private set; }
+        public override Color Color { get;}
 
-        public bool IsEmpty { get; private set; }
+        public override bool IsEmpty { get; set; }
 
         public CarpetTile(Position pos, Color color)
         {

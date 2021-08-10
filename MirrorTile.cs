@@ -4,17 +4,18 @@ using System.Text;
 
 namespace Ghosts.Common
 {
-    public class MirrorTile : ITile
+    public class MirrorTile : Tile
     {
-        public Position TilePos { get; private set; }
+        public override Position TilePos { get;}
 
-        public TileType TileType { get; private set; }
+        public override TileType TileType { get;}
 
 
-        public bool IsEmpty { get; private set; }
+        public override bool IsEmpty { get; protected set;}
 
         public MirrorTile(Position pos)
         {
+            TilePos = pos;
             TileType = TileType.Carpet;
             IsEmpty = true;
         }
