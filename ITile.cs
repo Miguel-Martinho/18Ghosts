@@ -1,15 +1,17 @@
-namespace Common
+using Ghosts.Common;
+
+namespace Ghosts.Common
 {
     public interface ITile
     {
         /// <summary>
         /// Property used to save the Tile's position
         /// </summary>
-        public Position TilePos { get; private set; }
+        Position TilePos { get;}
 
         /// <summary>
         /// Property used to save the Tile's type
         /// </summary>
-        public TileType TileType { get; set; }
+        TileType TileType { get;}
     }
 }
