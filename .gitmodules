@@ -2,7 +2,7 @@
 	path = Console/Common
 	url = https://github.com/Miguel-Martinho/Conway_MVC.git
 	branch = common
-[submodule "MVC_Conway/Assets/Scripts/Common"]
-	path = MVC_Conway/Assets/Scripts/Common
+[submodule "Unity/Assets/Scripts/Common"]
+	path = Unity/Assets/Scripts/Common
 	url = https://github.com/Miguel-Martinho/Conway_MVC.git
 	branch = common
