@@ -8,12 +8,9 @@ namespace Ghosts.Common
 
         public byte Player { get; private set;}
 
-        private Position temppos;
-
         public Ghost(CarpetTile tile,
          byte player)
         {
-            temppos = new Position();
             Pos = tile.TilePos;
             Color = tile.Color;
             Player = player;
@@ -25,8 +22,8 @@ namespace Ghosts.Common
         /// </summary>
         public void Movement(Tile tile)
         {
-            
-            if(tile.TileType == TileType.Portal)
+            Pos = tile.TilePos;
+            /*if(tile.TileType == TileType.Portal)
             {
                 if (tile.Direction == Pos.GetDirection(Pos, tile.TilePos) -2)
                 {
@@ -36,17 +33,29 @@ namespace Ghosts.Common
                 {
                     //dont move there
                 }
-            }
+            }*/
+/*
+            if (tile.TileType == TileType.Carpet && tile.IsEmpty == true)
+            {
+                Pos = tile.TilePos;
+            }*/
         }
 
         /// <summary>
         ///  Method used to make two
         ///  Ghosts to fight till the death
         /// </summary>
-        public void Fight()
+        public byte Fight(Tile tile)
         {
+            Movement(tile);
 
+        }
 
+        public void ChangeOwner()
+        {
+            if (Player == 1) Player = 2;
+            else
+                Player = 1;
         }
     }
 }

@@ -28,19 +28,22 @@ namespace Ghosts.Common
         }
         public PortalDirections GetDirection(Position position1, Position position2)
         {
+            PortalDirections tempDirection;
             Position result = new Position((short)(position1.Row - position2.Row),
              (short)(position1.Column - position2.Column));
 
             if(result.Row == 1)
-                return PortalDirections.Right;
+                tempDirection = PortalDirections.Right;           
 
             else if (result.Row == -1)
-                return PortalDirections.Left;
+                tempDirection = PortalDirections.Left;
 
             else if(result.Column == 1)
-                return PortalDirections.Up;
+                tempDirection = PortalDirections.Up;
             else
-                return PortalDirections.Down;
+                tempDirection = PortalDirections.Down;
+
+            return tempDirection;
         }
     }
 }
