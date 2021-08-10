@@ -2,19 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MVC_Conway.Common
+namespace Ghosts.Common
 {
     /// <summary>
     /// Class that represents the simulation grid
     /// </summary>
     public class Grid
     {
-        /// <summary>
-        /// Property used to save all the cells
-        /// in the simulation
-        /// </summary>
-        public IList<Cell> CellGroup { get; private set;}
-
         /// <summary>
         /// Property used to access the maximum
         /// dimensions of the grid's rows
@@ -34,7 +28,6 @@ namespace MVC_Conway.Common
         /// cell's in the simulation</param>
         public Grid(short maxRow, short maxColumn) 
         {
-            CellGroup = new List<Cell>();
             MaxRows = maxRow;
             MaxColumn = maxColumn;
         }
@@ -45,7 +38,7 @@ namespace MVC_Conway.Common
         /// </summary>
         public void GridSetup()
         {
-            Cell tempCell;
+            Ghost tempCell;
             for (byte i = 0; i < MaxRows; i++)
             {
                 for (byte j = 0; j < MaxColumn; j++)

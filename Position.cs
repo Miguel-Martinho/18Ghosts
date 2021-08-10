@@ -1,5 +1,5 @@
 ﻿
-namespace MVC_Conway.Common
+namespace Ghosts.Common
 {
     /// <summary>
     /// Represents every cell position in the simulation
@@ -16,8 +16,8 @@ namespace MVC_Conway.Common
         /// </summary>
         public short Column { get; private set;}
 
-        public short MaxRows {get;}
-        public short MaxColumns {get;}
+        public short MaxRows {get; private set;}
+        public short MaxColumns {get; private set;}
 
 
         /// <summary>
@@ -25,12 +25,12 @@ namespace MVC_Conway.Common
         /// </summary>
         /// <param name="row">Cell's Row Value</param>
         /// <param name="column">Cell's Column Value</param>
-        public Position(short row, short column, short maxRows, short maxColumns)
+        public Position(short row, short column)
         {
             Row = row;
             Column = column;
-            MaxRows = maxRows;
-            MaxColumns = maxColumns;
+            MaxRows = 5;
+            MaxColumns = 5;
             
         }
     }

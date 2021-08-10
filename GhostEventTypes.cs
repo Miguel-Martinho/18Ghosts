@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MVC_Conway.Common
+namespace Ghosts.Common
 {
-    public enum CellEventTypes
+    public enum GhostEventTypes
     {
         Movement,
         Fight,

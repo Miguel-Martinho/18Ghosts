@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace MVC_Conway.Common
+namespace Ghosts.Common
 {
     /// <summary>
     /// Enum used to represent the different colors
     /// of tiles in te game
     /// </summary>
-    public enum TileColor
+    public enum Color
     {
         /// <summary>
         /// Represents an Red Tile
