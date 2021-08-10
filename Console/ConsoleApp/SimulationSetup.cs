@@ -1,5 +1,5 @@
 using System;
-using MVC_Conway.Common;
+using Ghosts.Common;
 
 namespace ConsoleApp
 {
