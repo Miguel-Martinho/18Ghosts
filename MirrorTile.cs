@@ -13,7 +13,7 @@ namespace Ghosts.Common
 
         public bool IsEmpty { get; private set; }
 
-        public MirrorTile(Position pos, Color color)
+        public MirrorTile(Position pos)
         {
             TileType = TileType.Carpet;
             IsEmpty = true;

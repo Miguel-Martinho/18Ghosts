@@ -16,10 +16,6 @@ namespace Ghosts.Common
         /// </summary>
         public short Column { get; private set;}
 
-        public short MaxRows {get; private set;}
-        public short MaxColumns {get; private set;}
-
-
         /// <summary>
         /// Constructor for the Position Class
         /// </summary>
@@ -29,9 +25,6 @@ namespace Ghosts.Common
         {
             Row = row;
             Column = column;
-            MaxRows = 5;
-            MaxColumns = 5;
-            
         }
     }
 }
