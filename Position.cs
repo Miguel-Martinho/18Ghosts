@@ -16,26 +16,6 @@ namespace MVC_Conway.Common
         /// </summary>
         public short Column { get; private set;}
 
-        /// <summary>
-        /// Property that represents cell above
-        /// </summary>
-        public short TopCellPos { get; private set; }
-
-        /// <summary>
-        /// Property that represents cell below
-        /// </summary>
-        public short BotCellPos { get; private set; }
-
-        /// <summary>
-        /// Property that represents the left cell
-        /// </summary>
-        public short LeftCellPos { get; private set; }
-
-        /// <summary>
-        /// Property that represents the right cell
-        /// </summary>
-        public short RightCellPos { get; private set; }
-
         public short MaxRows {get;}
         public short MaxColumns {get;}
 
@@ -51,25 +31,7 @@ namespace MVC_Conway.Common
             Column = column;
             MaxRows = maxRows;
             MaxColumns = maxColumns;
-            if(column + 1 > MaxColumns)
-               RightCellPos = 0;
-            else
-                RightCellPos = (short)(column + 1);
-
-            if(column - 1 < 0)
-                LeftCellPos = MaxColumns;
-            else
-                LeftCellPos = (short)(column - 1);  
-
-            if(row + 1 > MaxRows)
-                TopCellPos = 0;
-            else
-                TopCellPos = (short)(row + 1);
-
-            if(row - 1 > 0)
-                BotCellPos = MaxRows;
-            else
-                BotCellPos = (short)(row - 1);
+            
         }
     }
 }
