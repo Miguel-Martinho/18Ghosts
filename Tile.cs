@@ -22,6 +22,7 @@ namespace Ghosts.Common
         public virtual Color Color { get;}
         public virtual bool IsEmpty { get; protected set;}
         public virtual PortalDirections Direction { get; protected set;}
+        public virtual Ghost Ghost { get; protected set;}
 
     }
 }

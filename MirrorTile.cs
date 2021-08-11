@@ -10,11 +10,13 @@ namespace Ghosts.Common
 
         public override TileType TileType { get;}
 
-
         public override bool IsEmpty { get; protected set;}
 
-        public MirrorTile(Position pos)
+        public override Ghost Ghost { get; protected set;}
+
+        public MirrorTile(Position pos, Ghost ghost)
         {
+            Ghost = ghost;
             TilePos = pos;
             TileType = TileType.Carpet;
             IsEmpty = true;

@@ -12,17 +12,17 @@ namespace Ghosts.Common
 
         public override Color Color { get;}
 
-        public override bool IsEmpty { get; set; }
+        public override bool IsEmpty { get; protected set; }
+        public override Ghost Ghost { get; protected set; }
 
-        public CarpetTile(Position pos, Color color)
+        public CarpetTile(Position pos, Color color, Ghost ghost)
         {
+            Ghost = ghost;
             TileType = TileType.Carpet;
             Color = color;
             IsEmpty = true;
         }
 
         public void ChangeState() => IsEmpty = false ? true : false;
-
-
     }
 }

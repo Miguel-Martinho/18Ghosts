@@ -2,7 +2,7 @@ namespace Ghosts.Common
 {
     public class Ghost
     {
-        public Position Pos { get; set;}
+        public Tile CurrentTile { get; set;}
 
         public Color Color {get; private set;}
 
@@ -11,7 +11,7 @@ namespace Ghosts.Common
         public Ghost(CarpetTile tile,
          byte player)
         {
-            Pos = tile.TilePos;
+            CurrentTile = tile;
             Color = tile.Color;
             Player = player;
         }
@@ -20,9 +20,9 @@ namespace Ghosts.Common
         /// Method used to move the ghost from its
         /// current position into an empty tile
         /// </summary>
-        public void Movement(Tile tile)
+        public void Movement(Tile newtile)
         {
-            Pos = tile.TilePos;
+            CurrentTile = newtile;
             /*if(tile.TileType == TileType.Portal)
             {
                 if (tile.Direction == Pos.GetDirection(Pos, tile.TilePos) -2)
@@ -39,16 +39,6 @@ namespace Ghosts.Common
             {
                 Pos = tile.TilePos;
             }*/
-        }
-
-        /// <summary>
-        ///  Method used to make two
-        ///  Ghosts to fight till the death
-        /// </summary>
-        public byte Fight(Tile tile)
-        {
-            Movement(tile);
-
         }
 
         public void ChangeOwner()
