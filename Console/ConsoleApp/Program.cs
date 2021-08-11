@@ -8,8 +8,8 @@ namespace ConsoleApp
     {
         private static void Main(string[] args)
         {
-            SimulationSetup setup = new SimulationSetup(parameters);
-            setup.RunSimulation();
+            Game game = new Game();
+            game.GameRun();
         }
     }
 }
