@@ -7,59 +7,40 @@ namespace ConsoleApp
     {
         private Board board;
         private GameHandler game;
+        private Input input;
+        private Renderer consoleRenderer;
 
-        public Gameloop()
+        public Game()
         {
             board = new Board(5,5);
             game = new GameHandler();
-            //new input instance
-            //new renderer instance
+            input = new Input();
+            consoleRenderer = new Renderer();
         }
-        public GameRun()
+        public void GameRun()
         {
+            string playerInput = "";
             board.BoardTilesSetup();
             game = new GameHandler();
-
-            //this is here because at the start player 1
-            //plays once and then player 2 plays twice
-
-            //selectedtile = Selector();    
-            //game.PlaceGhost(selected tile);
-            game.ChangeCurrentPlayer();
-            //selectedtile = Selector();    
-            //game.PlaceGhost(selected tile);
-            //selectedtile = Selector();    
-            //game.PlaceGhost(selected tile);
-            game.ChangeCurrentPlayer();
-
-            while (game.Ghosts.Count < 15)
+            //Prints the Title Card
+            consoleRenderer.PrintTitleScreen();
+            input.TitleScreenInput();
+            do
             {
-                //selectedtile = Selector();
-                //game.PlaceGhost(selected tile);
-                game.ChangeCurrentPlayer();
 
-            }
-            while(game.Wincheck() == 0)
-            {
-                Console.ReadLine();
-                //Class input chose revive or ghost
-                //if (ghost)
-                //select ghost
-                //selectedghost = Selector();
-                //select a tile
-                //selectedtile = Selector();
-                //if tile is not empty
-                //game handler grabs that tiles ghost
-                game.Fight(selectedghost, selectedtile.ghost);
-                    //else
-                    //selectedghost.Movement(selectedtile);
-                //else if (revive)
-                game.RespawnGhost();
-                //else (print "dungeon is empty")
+                // Gets user Input
+                playerInput = input.MainMenuInput();
+                if (playerInput == "1") break;
 
-            }
+                //Breaks the loop and quits the game
+                if (playerInput == "4") break;
+
+            } while (true);
+        }
+        
+            
+            //Ta no bloco de notas
 
         }
         
     }
-}
