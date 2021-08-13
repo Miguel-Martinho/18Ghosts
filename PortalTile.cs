@@ -24,12 +24,12 @@ namespace Ghosts.Common
 
         public void ChangeDirection()
         {
-            if (this.Direction == PortalDirections.Left)
+            if (Direction == PortalDirections.Left)
             {
-                this.Direction = PortalDirections.Up;
+                Direction = PortalDirections.Up;
             }
             else
-                this.Direction += 1;
+                Direction += 1;
         }
 
 

@@ -14,9 +14,8 @@ namespace Ghosts.Common
 
         public override Ghost Ghost { get; protected set;}
 
-        public MirrorTile(Position pos, Ghost ghost)
+        public MirrorTile(Position pos)
         {
-            Ghost = ghost;
             TilePos = pos;
             TileType = TileType.Carpet;
             IsEmpty = true;

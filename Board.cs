@@ -35,6 +35,8 @@ namespace Ghosts.Common
         {
             MaxRows = maxRow;
             MaxColumn = maxColumn;
+            PositionList = new List<Position>();
+            TileList = new List<Tile>();
         }
 
         /// <summary>
