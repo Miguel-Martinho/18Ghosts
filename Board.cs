@@ -21,9 +21,7 @@ namespace Ghosts.Common
         /// </summary>
         public short MaxColumn { get; private set; }
 
-        public IList<Position> PositionList { get; private set; }
-
-        public IList<Tile> TileList { get; private set; }
+        public Tile[,] TileArray { get; private set; }
 
 
         /// <summary>
@@ -35,77 +33,56 @@ namespace Ghosts.Common
         {
             MaxRows = maxRow;
             MaxColumn = maxColumn;
-            PositionList = new List<Position>();
-            TileList = new List<Tile>();
-        }
-
-        /// <summary>
-        /// Method used to place a cell per position
-        /// based on the max rows and columns defined
-        /// </summary>
-        public void BoardPositionsSetup()
-        {
-            Position tempPos;
-
-            for (byte i = 0; i < MaxRows; i++)
-            {
-                for (byte j = 0; j < MaxColumn; j++)
-                {
-                    tempPos = new Position(i, j);
-                    PositionList.Add(tempPos);
-                }
-            }
         }
 
         public void BoardTilesSetup()
         {
-            Tile tempTile;
-
-            for (int i = 0; i < PositionList.Count; i++)
+            Tile[,] TileArray = new Tile[MaxRows,MaxColumn];
+            for (short i = 0; i < MaxRows; i++)
             {
-
-                if (i == 0 || i == 3 || i == 11 ||
-                    i == 13 || i == 15 || i == 23)
-                {
-                    tempTile = new CarpetTile(PositionList[i], Color.Blue);
-                    TileList.Add(tempTile);
-                }
-
-                else if (i == 1 || i == 4 || i == 10 ||
-                    i == 12 || i == 19 || i == 21)
-                {
-                    tempTile = new CarpetTile(PositionList[i], Color.Red);
-                    TileList.Add(tempTile);
-                }
-
-                else if (i == 5 || i == 7 || i == 9 ||
-                    i == 17 || i == 20 || i == 24)
-                {
-                    tempTile = new CarpetTile(PositionList[i], Color.Yellow);
-                    TileList.Add(tempTile);
-                }
-
-                else if (i == 6 || i == 8 || i == 16 ||
-                    i == 18)
-                {
-                    tempTile = new MirrorTile(PositionList[i]);
-                    TileList.Add(tempTile);
-                }
-
-                else if (i == 6 || i == 8 || i == 16 ||
-                    i == 18)
-                {
-                    tempTile = new MirrorTile(PositionList[i]);
-                    TileList.Add(tempTile);
-                }
-
-                else if (i == 2)
-                {
-                    tempTile = new PortalTile(PositionList[i],
+                for (short j = 0; j < MaxColumn; j++)
+                    {
+                        if (i == 0 && j == 0 || i == 0 && j == 3 || i == 2 && j == 1
+                        || i == 2 && j == 3 || i == 3 && j == 0 || i == 4 && j == 3)
+                    {
+                        TileArray[i,j] = new CarpetTile(new Position(i,j), Color.Blue);
+                    }
+    
+                    else if(i == 0 && j == 1 || i == 0 && j == 4 || i == 2 && j == 0
+                    || i == 2 && j == 2 || i == 3 && j == 4 || i == 4 && j == 1)
+                    {
+                        TileArray[i,j] = new CarpetTile(new Position(i,j), Color.Red);
+                    }
+    
+                    else if(i == 1 && j == 0 || i == 1 && j == 2 || i == 1 && j == 4
+                    || i == 3 && j == 2 || i == 4 && j == 0 || i == 4 && j == 4)
+                    {
+                        TileArray[i,j] = new CarpetTile(new Position(i,j), Color.Yellow);
+                    }
+    
+                    else if(i == 1 && j == 1 || i == 0 && j == 3 || i == 3 && j == 1
+                    || i == 3 && j == 3)
+                    {
+                        TileArray[i,j] = new MirrorTile(new Position(i,j));
+                    }
+                    else if (i == 0 && j == 2)
+                    {
+                        TileArray[i,j] = new PortalTile(new Position(i,j),
                         Color.Red, PortalDirections.Up);
-                    TileList.Add(tempTile);
+                    }
+                    else if (i == 2 && j == 4)
+                    {
+                        TileArray[i,j] = new PortalTile(new Position(i,j),
+                        Color.Yellow, PortalDirections.Right);
+                    }
+                    else if (i == 4 && j == 2)
+                    {
+                        TileArray[i,j] = new PortalTile(new Position(i,j),
+                        Color.Blue, PortalDirections.Down);
+                    }
                 }
             }
+
         }
     }
 }
