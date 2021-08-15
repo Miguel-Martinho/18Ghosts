@@ -79,48 +79,83 @@ namespace ConsoleApp
         }
         public void RenderBoard(Tile[,] tileArray)
         {
-            Console.Write(" ___________________");
+            /*Console.Write(" ___________________");*/
             for (int i = 0; i < rows; i++)
             {
                 Console.WriteLine("");
                 
                 for (int j = 0; j < columns; j++)
                 {
+
+                   
                     if (j == 0)
                     {
+                        Console.Write(@"{0}.    ", i);
+                        Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
                     }
+
                     if (tileArray[i, j].TileType == TileType.Carpet)
                    
                     {
                         if (tileArray[i, j].Color == Color.Red)
                         {
-                            Console.Write("_1_|");
-                            /*Console.BackgroundColor = ConsoleColor.Red;*/
+                            
+                            Console.BackgroundColor = ConsoleColor.DarkRed; 
+
+                            Console.Write(" 1 ");
                         }
                         else if (tileArray[i, j].Color == Color.Blue)
                         {
-                            Console.Write("_2_|");
-                            /*Console.BackgroundColor = ConsoleColor.Blue;*/
+                            
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
+                           
+                            Console.Write(" 2 ");
                         }
                         else if (tileArray[i, j].Color == Color.Yellow)
                         {
-                            Console.Write("_3_|");
-                            /*Console.BackgroundColor = ConsoleColor.Yellow;*/
+                            
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            
+                            Console.Write(" 3 ");
                         }
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("|");
                     }
+
                     else if (tileArray[i, j].TileType == TileType.Portal)
                     {
 
-                        Console.Write("_P_|");
+                        if (tileArray[i, j].Color == Color.Red)
+                        {
+                            
+                            Console.BackgroundColor = ConsoleColor.DarkRed;
+                        }
+                        else if (tileArray[i, j].Color == Color.Blue)
+                        {
+                            
+                            Console.BackgroundColor = ConsoleColor.DarkBlue;
+                        }
+                        else if (tileArray[i, j].Color == Color.Yellow)
+                        {
+                            
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                        }
+                        Console.Write(" P ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("|");
                     }
                     else
                     {
-                        Console.Write("_M_|");
-                        /*Console.BackgroundColor = ConsoleColor.Gray;*/
+                       
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
+                        Console.Write(" M ");
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        Console.Write("|");
                     }
                 }
             }
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine("");
         }
     }
