@@ -17,7 +17,7 @@ namespace Ghosts.Common
         public PortalTile(Position pos, Color color,
             PortalDirections dir)
         {
-            TileType = TileType.Carpet;
+            TileType = TileType.Portal;
             Color = color;
             Direction = dir;
         }

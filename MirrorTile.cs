@@ -17,7 +17,7 @@ namespace Ghosts.Common
         public MirrorTile(Position pos)
         {
             TilePos = pos;
-            TileType = TileType.Carpet;
+            TileType = TileType.Mirror;
             IsEmpty = true;
         }
 

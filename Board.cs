@@ -33,11 +33,12 @@ namespace Ghosts.Common
         {
             MaxRows = maxRow;
             MaxColumn = maxColumn;
+            TileArray = new Tile[MaxRows, MaxColumn];
         }
 
         public void BoardTilesSetup()
         {
-            Tile[,] TileArray = new Tile[MaxRows,MaxColumn];
+            
             for (short i = 0; i < MaxRows; i++)
             {
                 for (short j = 0; j < MaxColumn; j++)
@@ -60,7 +61,7 @@ namespace Ghosts.Common
                         TileArray[i,j] = new CarpetTile(new Position(i,j), Color.Yellow);
                     }
     
-                    else if(i == 1 && j == 1 || i == 0 && j == 3 || i == 3 && j == 1
+                    else if(i == 1 && j == 1 || i == 3 && j == 1 || i == 1 && j == 3
                     || i == 3 && j == 3)
                     {
                         TileArray[i,j] = new MirrorTile(new Position(i,j));
@@ -80,8 +81,11 @@ namespace Ghosts.Common
                         TileArray[i,j] = new PortalTile(new Position(i,j),
                         Color.Blue, PortalDirections.Down);
                     }
+
                 }
+
             }
+            
 
         }
     }
