@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Ghosts.Common;
 
 namespace ConsoleApp
 {
     public class Renderer
     {
+        private byte columns;
+        private byte rows;
+
+        public Renderer(byte maxcolumns, byte maxrows)
+        {
+            columns = maxcolumns;
+            rows = maxrows;
+        }
         public void PrintTitleScreen()
         {
             Console.WriteLine(" _____________________________________________");
@@ -59,14 +68,49 @@ namespace ConsoleApp
             Console.WriteLine("| Goncalo Vila Verde |");
             Console.WriteLine("|____________________|");
             Console.WriteLine("");
-            Console.WriteLine("Press any key to return to the main manu");
+            Console.WriteLine("Press any key to return to the main menu");
         }
 
         public void PrintInstructions()
         {
             Console.WriteLine("");
             Console.WriteLine("Google Instructions for now");
-            Console.WriteLine("Press any key to return to the main manu");
+            Console.WriteLine("Press any key to return to the main menu");
+        }
+        public void RenderBoard(Tile[,] tileArray)
+        {
+            Console.Write("_________________");
+            for (int i = 0; i < rows; i++)
+            {
+                Console.WriteLine("");
+                for (int j = 0; j < columns; j++)
+                {
+                    if (tileArray[i,j].TileType == TileType.Carpet || 
+                    tileArray[i,j].TileType == TileType.Portal)
+                    {
+                        if (tileArray[i,j].Color == Color.Red)
+                        {
+                            Console.Write(tileArray[i,j]);
+                            Console.BackgroundColor = ConsoleColor.Red;
+                        }
+                        else if (tileArray[i,j].Color == Color.Blue)
+                        {
+                            Console.Write("|_2_|");
+                            Console.BackgroundColor = ConsoleColor.Blue;
+                        }
+                        else if (tileArray[i,j].Color == Color.Yellow)
+                        {
+                            Console.Write("|_3_|");
+                            Console.BackgroundColor = ConsoleColor.Yellow;
+                        }
+                    }
+                    else
+                    {
+                        Console.Write("|___|");
+                        Console.BackgroundColor = ConsoleColor.Gray;
+                    }
+                }
+            }
         }
     }
 }

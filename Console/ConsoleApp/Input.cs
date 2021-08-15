@@ -10,9 +10,9 @@ namespace ConsoleApp
         private string playerInput;
         private Renderer consoleRender;
 
-        public Input()
+        public Input(Renderer renderer)
         {
-            consoleRender = new Renderer();
+            consoleRender = renderer;
         }
         public void TitleScreenInput()
         {

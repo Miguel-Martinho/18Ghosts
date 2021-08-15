@@ -14,14 +14,12 @@ namespace ConsoleApp
         {
             board = new Board(5,5);
             game = new GameHandler();
-            input = new Input();
-            consoleRenderer = new Renderer();
+            consoleRenderer = new Renderer(5,5);
+            input = new Input(consoleRenderer);
         }
         public void GameRun()
         {
             string playerInput = "";
-            board.BoardTilesSetup();
-            game = new GameHandler();
             //Prints the Title Card
             consoleRenderer.PrintTitleScreen();
             input.TitleScreenInput();
@@ -36,9 +34,10 @@ namespace ConsoleApp
                 if (playerInput == "4") break;
 
             } while (true);
+            board.BoardTilesSetup();
+            consoleRenderer.RenderBoard(board.TileArray);
+
         }
-        
-            
             //Ta no bloco de notas
 
         }
