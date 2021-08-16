@@ -59,5 +59,39 @@ namespace ConsoleApp
             Console.ReadKey();
             return playerInput;
         }
+        public string DirectionalInput()
+        {
+            ConsoleKeyInfo playerInputinfo;
+            playerInputinfo = Console.ReadKey();
+            switch (playerInputinfo.Key)
+            {
+                //Sends information to go left
+                case ConsoleKey.A:
+                    playerInput = "left";
+                    break;
+
+                //Sends information to go up
+                case ConsoleKey.W:
+                    playerInput = "up";
+                    break;
+
+                //Sends information to go right
+                case ConsoleKey.D:
+                    playerInput = "right";
+                    break;
+
+                //Sends information to go down
+                case ConsoleKey.S:
+                    playerInput = "down";
+                    break;
+                case ConsoleKey.Enter:
+                    playerInput = "enter"; 
+                    break;
+                default:
+                    consoleRender.PrintInputErrorMsg();
+                    break;
+            }
+            return playerInput;
+        }
     }
 }

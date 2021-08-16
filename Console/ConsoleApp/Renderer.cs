@@ -77,8 +77,9 @@ namespace ConsoleApp
             Console.WriteLine("Google Instructions for now");
             Console.WriteLine("Press any key to return to the main menu");
         }
-        public void RenderBoard(Tile[,] tileArray)
+        public void RenderBoard(Tile[,] tileArray, Tile higlightedTile)
         {
+
             /*Console.Write(" ___________________");*/
             for (int i = 0; i < rows; i++)
             {
@@ -103,21 +104,21 @@ namespace ConsoleApp
                             
                             Console.BackgroundColor = ConsoleColor.DarkRed; 
 
-                            Console.Write(" 1 ");
+                            Console.Write("   ");
                         }
                         else if (tileArray[i, j].Color == Color.Blue)
                         {
                             
                             Console.BackgroundColor = ConsoleColor.DarkBlue;
                            
-                            Console.Write(" 2 ");
+                            Console.Write("   ");
                         }
                         else if (tileArray[i, j].Color == Color.Yellow)
                         {
                             
-                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.BackgroundColor = ConsoleColor.Yellow;
                             
-                            Console.Write(" 3 ");
+                            Console.Write("   ");
                         }
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
@@ -139,7 +140,7 @@ namespace ConsoleApp
                         else if (tileArray[i, j].Color == Color.Yellow)
                         {
                             
-                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.BackgroundColor = ConsoleColor.Yellow;
                         }
                         Console.Write(" P ");
                         Console.BackgroundColor = ConsoleColor.Black;
@@ -152,6 +153,15 @@ namespace ConsoleApp
                         Console.Write(" M ");
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
+                    }
+                    //colors the highligted tile
+                    if (higlightedTile.TilePos.Row == i &&
+                    higlightedTile.TilePos.Column == j)
+                    {
+                        if (Console.BackgroundColor == ConsoleColor.Black)
+                            Console.BackgroundColor = ConsoleColor.White;
+                        else
+                            Console.BackgroundColor = ConsoleColor.Black;
                     }
                 }
             }
