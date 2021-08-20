@@ -88,14 +88,28 @@ namespace ConsoleApp
                 for (int j = 0; j < columns; j++)
                 {
 
-                   
                     if (j == 0)
                     {
                         Console.Write(@"{0}.    ", i);
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
                     }
-
+                    //highlighted Tile check
+                    if (higlightedTile.TilePos.Row == i &&
+                    higlightedTile.TilePos.Column == j)
+                    {
+                        if (Console.BackgroundColor == ConsoleColor.Black)
+                        {
+                            Console.BackgroundColor = ConsoleColor.White;
+                            Console.Write(" ");
+                        }
+                        else
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Write(" ");
+                        }
+                    }
+                    //Carpet check
                     if (tileArray[i, j].TileType == TileType.Carpet)
                    
                     {
@@ -104,26 +118,26 @@ namespace ConsoleApp
                             
                             Console.BackgroundColor = ConsoleColor.DarkRed; 
 
-                            Console.Write("   ");
+                            CheckToDraw(tileArray[i,j]);
                         }
                         else if (tileArray[i, j].Color == Color.Blue)
                         {
                             
                             Console.BackgroundColor = ConsoleColor.DarkBlue;
                            
-                            Console.Write("   ");
+                            CheckToDraw(tileArray[i,j]);
                         }
                         else if (tileArray[i, j].Color == Color.Yellow)
                         {
                             
                             Console.BackgroundColor = ConsoleColor.Yellow;
                             
-                            Console.Write("   ");
+                            CheckToDraw(tileArray[i,j]);
                         }
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
                     }
-
+                    //portal check
                     else if (tileArray[i, j].TileType == TileType.Portal)
                     {
 
@@ -146,27 +160,38 @@ namespace ConsoleApp
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
                     }
+                    //Mirror check
                     else
                     {
-                       
                         Console.BackgroundColor = ConsoleColor.DarkGray;
                         Console.Write(" M ");
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write("|");
                     }
-                    //colors the highligted tile
-                    if (higlightedTile.TilePos.Row == i &&
-                    higlightedTile.TilePos.Column == j)
-                    {
-                        if (Console.BackgroundColor == ConsoleColor.Black)
-                            Console.BackgroundColor = ConsoleColor.White;
-                        else
-                            Console.BackgroundColor = ConsoleColor.Black;
-                    }
                 }
             }
             Console.BackgroundColor = ConsoleColor.Black;
             Console.WriteLine("");
+        }
+
+        public void CheckToDraw(Tile tile)
+        {
+            if (tile.IsEmpty)
+                Console.Write("   ");
+            else
+            {
+                if (tile.Ghost.Player == 1)
+                {
+                    Console.Write(" 1 ");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                else
+                {
+                    Console.Write(" 2 ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+            }
+
         }
     }
 }

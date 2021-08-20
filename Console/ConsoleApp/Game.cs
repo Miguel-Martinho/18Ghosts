@@ -10,7 +10,11 @@ namespace ConsoleApp
         private Input input;
         private Renderer consoleRenderer;
         private Selector selector;
-        private Tile previousTile; 
+        private Tile previousTile;
+        private Tile selectedTile;
+        private Tile toMove;
+        private bool placingphase;
+        private bool playingphase;
 
         public Game()
         {
@@ -19,11 +23,11 @@ namespace ConsoleApp
             consoleRenderer = new Renderer(5,5);
             input = new Input(consoleRenderer);
             selector = new Selector(5,5);
+            placingphase = true;
         }
         public void GameRun()
         {
             string playerInput = "";
-            Tile selectedTile;
             //Prints the Title Card
             consoleRenderer.PrintTitleScreen();
             input.TitleScreenInput();
@@ -42,18 +46,58 @@ namespace ConsoleApp
             previousTile = board.TileArray[0,0];
             consoleRenderer.RenderBoard(board.TileArray, previousTile);
 
-            //while loop for player to select a Tile
-            while (playerInput != "enter")
+            //Lots of repeateded code, very spaghet
+            //TODO: FIX SPAGHET
+            while(placingphase ==  true)
             {
-                playerInput = input.DirectionalInput();
+                while (playerInput != "enter")
+                {
+                    playerInput = input.DirectionalInput();
 
-                selectedTile = selector.SelectTile
-                (board.TileArray, playerInput, previousTile);
+                    selectedTile = selector.SelectTile
+                    (board.TileArray, playerInput, previousTile);
 
-                previousTile = selectedTile;
+                    previousTile = selectedTile;
 
-                consoleRenderer.RenderBoard(board.TileArray, selectedTile);
+                    consoleRenderer.RenderBoard(board.TileArray, selectedTile);
+                }
+                playerInput = "";
+                game.PlaceGhost(selectedTile);
+                game.ChangeCurrentPlayer();
             }
+
+            while (playingphase == true)
+            {
+                while (playerInput != "enter")
+                {
+                    playerInput = input.DirectionalInput();
+
+                    selectedTile = selector.SelectTile
+                    (board.TileArray, playerInput, previousTile);
+
+                    previousTile = selectedTile;
+
+                    consoleRenderer.RenderBoard(board.TileArray, selectedTile);
+                }
+                playerInput = "";
+                while (playerInput != "enter")
+                {
+                    playerInput = input.DirectionalInput();
+
+                    toMove = selector.SelectTile
+                    (board.TileArray, playerInput, previousTile);
+
+                    previousTile = toMove;
+
+                    consoleRenderer.RenderBoard(board.TileArray, selectedTile);
+                }
+                if (toMove.IsEmpty == true)
+                    selectedTile.Ghost.Movement(toMove);
+                else
+                    game.Fight(selectedTile.Ghost, toMove.Ghost);
+            }
+            //while loop for player to select a Tile
+            
         }
             //Ta no bloco de notas
     }
