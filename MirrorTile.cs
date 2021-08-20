@@ -20,7 +20,11 @@ namespace Ghosts.Common
             TileType = TileType.Mirror;
             IsEmpty = true;
         }
+        public override void AssignGhostToTile(Ghost ghost)
+        {
+            Ghost = ghost;
+        }
 
-        public void ChangeState() => IsEmpty = false ? true : false;
+        public override void ChangeState() => IsEmpty = false ? true : false;
     }
 }

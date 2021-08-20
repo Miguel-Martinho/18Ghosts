@@ -17,6 +17,7 @@ namespace Ghosts.Common
         public PortalTile(Position pos, Color color,
             PortalDirections dir)
         {
+            TilePos = pos;
             TileType = TileType.Portal;
             Color = color;
             Direction = dir;
@@ -31,7 +32,6 @@ namespace Ghosts.Common
             else
                 Direction += 1;
         }
-
-
+        public override void ChangeState() => IsEmpty = false ? true : false;
     }
 }

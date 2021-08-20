@@ -2,7 +2,7 @@ namespace Ghosts.Common
 {
     public class Ghost
     {
-        public Tile CurrentTile { get; set;}
+        public Tile CurrentTile { get; private set;}
 
         public Color Color {get; private set;}
 
@@ -23,6 +23,7 @@ namespace Ghosts.Common
         public void Movement(Tile newtile)
         {
             CurrentTile = newtile;
+            newtile.AssignGhostToTile(this);
             /*if(tile.TileType == TileType.Portal)
             {
                 if (tile.Direction == Pos.GetDirection(Pos, tile.TilePos) -2)

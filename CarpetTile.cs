@@ -18,17 +18,17 @@ namespace Ghosts.Common
 
         public CarpetTile(Position pos, Color color)
         {
-            
+            TilePos = pos;
             TileType = TileType.Carpet;
             Color = color;
             IsEmpty = true;
         }
 
-        public void AssignGhostToTile(Ghost ghost)
+        public override void AssignGhostToTile(Ghost ghost)
         {
             Ghost = ghost;
         }
 
-        public void ChangeState() => IsEmpty = false ? true : false;
+        public override void ChangeState() => IsEmpty = false ? true : false;
     }
 }

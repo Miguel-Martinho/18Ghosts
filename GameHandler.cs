@@ -26,6 +26,8 @@ namespace Ghosts.Common
         {
             Ghost tempGhost; 
             tempGhost = new Ghost (tile as CarpetTile, CurrentPlayer);
+            tile.ChangeState();
+            tile.AssignGhostToTile(tempGhost);
             Ghosts.Add(tempGhost);
         }
 
@@ -68,25 +70,31 @@ namespace Ghosts.Common
 
         public void Fight(Ghost ghost1, Ghost ghost2)
         {
+            Tile temptile;
+
             if (ghost1.Color == Color.Blue && ghost2.Color == Color.Yellow)
             {
-                ghost1.Movement(ghost2.CurrentTile);
+                temptile = ghost2.CurrentTile;
                 KillGhost(ghost2);
+                ghost1.Movement(temptile);
             }
             else if (ghost1.Color == Color.Yellow && ghost2.Color == Color.Red)
             {
-                ghost1.Movement(ghost2.CurrentTile);
+                temptile = ghost2.CurrentTile;
                 KillGhost(ghost2);
+                ghost1.Movement(temptile);
             }
             else if (ghost1.Color == Color.Red && ghost2.Color == Color.Blue)
             {
-                ghost1.Movement(ghost2.CurrentTile);
+                temptile = ghost2.CurrentTile;
                 KillGhost(ghost2);
+                ghost1.Movement(temptile);
             }
             else
             {
-                ghost2.Movement(ghost1.CurrentTile);
+                temptile = ghost1.CurrentTile;
                 KillGhost(ghost1);
+                ghost2.Movement(ghost1.CurrentTile);
             }
         }
 

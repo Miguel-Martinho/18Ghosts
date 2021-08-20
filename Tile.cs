@@ -23,6 +23,10 @@ namespace Ghosts.Common
         public virtual bool IsEmpty { get; protected set;}
         public virtual PortalDirections Direction { get; protected set;}
         public virtual Ghost Ghost { get; protected set;}
-
+        public virtual void ChangeState() => IsEmpty = false ? true : false;
+        public virtual void AssignGhostToTile(Ghost ghost)
+        {
+            Ghost = ghost;
+        }
     }
 }
