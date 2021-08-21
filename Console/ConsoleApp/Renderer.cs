@@ -48,6 +48,11 @@ namespace ConsoleApp
 
         }
 
+        public void PlaceGhostErrorMsg()
+        {
+            Console.WriteLine("Ghosts must be placed on Carpet Tiles");
+        }
+        
         public void PrintInputErrorMsg()
         {
             Console.WriteLine("Option Unkown");

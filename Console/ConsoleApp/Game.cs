@@ -13,17 +13,17 @@ namespace ConsoleApp
         private Tile previousTile;
         private Tile selectedTile;
         private Tile toMove;
-        private bool placingphase;
+        private bool placingPhase;
         private bool playingphase;
 
         public Game()
         {
-            board = new Board(5,5);
+            board = new Board(5, 5);
             game = new GameHandler();
-            consoleRenderer = new Renderer(5,5);
+            consoleRenderer = new Renderer(5, 5);
             input = new Input(consoleRenderer);
-            selector = new Selector(5,5);
-            placingphase = true;
+            selector = new Selector(5, 5);
+            placingPhase = true;
         }
         public void GameRun()
         {
@@ -43,12 +43,12 @@ namespace ConsoleApp
             } while (true);
             //sets up the board for the start of the game
             board.BoardTilesSetup();
-            previousTile = board.TileArray[0,0];
+            previousTile = board.TileArray[0, 0];
             consoleRenderer.RenderBoard(board.TileArray, previousTile);
 
             //Lots of repeateded code, very spaghet
             //TODO: FIX SPAGHET
-            while(placingphase ==  true)
+            while (placingPhase == true)
             {
                 while (playerInput != "enter")
                 {
@@ -62,8 +62,12 @@ namespace ConsoleApp
                     consoleRenderer.RenderBoard(board.TileArray, selectedTile);
                 }
                 playerInput = "";
-                game.PlaceGhost(selectedTile);
-                game.ChangeCurrentPlayer();
+                if (game.PlaceGhost(selectedTile) == false)
+                {
+                    consoleRenderer.PlaceGhostErrorMsg();
+                }
+                else
+                    game.ChangeCurrentPlayer();
             }
 
             while (playingphase == true)
@@ -97,8 +101,8 @@ namespace ConsoleApp
                     game.Fight(selectedTile.Ghost, toMove.Ghost);
             }
             //while loop for player to select a Tile
-            
+
         }
-            //Ta no bloco de notas
+        //Ta no bloco de notas
     }
 }
