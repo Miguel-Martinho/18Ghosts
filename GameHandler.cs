@@ -6,7 +6,7 @@ namespace Ghosts.Common
 {
     public class GameHandler
     {
-        public IList<Ghost> Ghosts {get; private set;}
+        public IList<Ghost> Ghosts { get; private set; }
         public IList<Ghost> DungeonGhosts { get; private set; }
         public IList<Ghost> EscapedGhosts { get; private set; }
         public byte player1wincount;
@@ -22,13 +22,21 @@ namespace Ghosts.Common
             player1wincount = 0;
             player2wincount = 0;
         }
-        public void PlaceGhost(Tile tile)
+        public bool PlaceGhost(Tile tile)
         {
-            Ghost tempGhost; 
-            tempGhost = new Ghost (tile as CarpetTile, CurrentPlayer);
-            tile.ChangeState();
-            tile.AssignGhostToTile(tempGhost);
-            Ghosts.Add(tempGhost);
+            Ghost tempGhost;
+            if (tile.TileType == TileType.Portal ||
+                tile.TileType == TileType.Mirror)
+                return false;
+            else
+            {
+                tempGhost = new Ghost(tile as CarpetTile, CurrentPlayer);
+                tile.ChangeState();
+                tile.AssignGhostToTile(tempGhost);
+                Ghosts.Add(tempGhost);
+            }
+            return true;
+                
         }
 
         public void ChangeCurrentPlayer()
@@ -44,7 +52,7 @@ namespace Ghosts.Common
             EscapedGhosts.Add(ghost);
             if (ghost.Player == 1)
                 player1wincount++;
-            else 
+            else
                 player2wincount++;
             Wincheck();
         }
