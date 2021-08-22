@@ -9,20 +9,22 @@ namespace ConsoleApp
         private GameHandler game;
         private Input input;
         private Renderer consoleRenderer;
-        private Selector selector;
         private Tile previousTile;
-        private Tile selectedTile;
-        private Tile toMove;
+        private Tile firstTile;
+        private Tile secondTile;
         private bool placingPhase;
         private bool playingphase;
+        private byte column;
+        private byte row;
 
         public Game()
         {
-            board = new Board(5, 5);
+            column = 5;
+            row = 5;
+            board = new Board(column, row);
             game = new GameHandler();
-            consoleRenderer = new Renderer(5, 5);
+            consoleRenderer = new Renderer(column, row);
             input = new Input(consoleRenderer);
-            selector = new Selector(5, 5);
             placingPhase = true;
         }
         public void GameRun()
@@ -46,23 +48,20 @@ namespace ConsoleApp
             previousTile = board.TileArray[0, 0];
             consoleRenderer.RenderBoard(board.TileArray, previousTile);
 
-            //Lots of repeateded code, very spaghet
-            //TODO: FIX SPAGHET
+            //player 1 plays twice
+            //MISSING: if tile is invalid 
+            firstTile = ValidInputLoop(previousTile, playerInput);
+
+            if (game.PlaceGhost(firstTile) == false)
+            {
+                consoleRenderer.PlaceGhostErrorMsg();
+            }
+
             while (placingPhase == true)
             {
-                while (playerInput != "enter")
-                {
-                    playerInput = input.DirectionalInput();
+                firstTile = ValidInputLoop(previousTile, playerInput);
 
-                    selectedTile = selector.SelectTile
-                    (board.TileArray, playerInput, previousTile);
-
-                    previousTile = selectedTile;
-
-                    consoleRenderer.RenderBoard(board.TileArray, selectedTile);
-                }
-                playerInput = "";
-                if (game.PlaceGhost(selectedTile) == false)
+                if (game.PlaceGhost(firstTile) == false)
                 {
                     consoleRenderer.PlaceGhostErrorMsg();
                 }
@@ -72,37 +71,79 @@ namespace ConsoleApp
 
             while (playingphase == true)
             {
-                while (playerInput != "enter")
-                {
-                    playerInput = input.DirectionalInput();
+                firstTile = ValidInputLoop(previousTile, playerInput);
 
-                    selectedTile = selector.SelectTile
-                    (board.TileArray, playerInput, previousTile);
+                secondTile = ValidInputLoop(previousTile, playerInput);
 
-                    previousTile = selectedTile;
-
-                    consoleRenderer.RenderBoard(board.TileArray, selectedTile);
-                }
-                playerInput = "";
-                while (playerInput != "enter")
-                {
-                    playerInput = input.DirectionalInput();
-
-                    toMove = selector.SelectTile
-                    (board.TileArray, playerInput, previousTile);
-
-                    previousTile = toMove;
-
-                    consoleRenderer.RenderBoard(board.TileArray, selectedTile);
-                }
-                if (toMove.IsEmpty == true)
-                    selectedTile.Ghost.Movement(toMove);
+                if (secondTile.IsEmpty == true)
+                    firstTile.Ghost.Movement(secondTile);
                 else
-                    game.Fight(selectedTile.Ghost, toMove.Ghost);
+                    game.Fight(firstTile.Ghost, secondTile.Ghost);
+
+                game.ChangeCurrentPlayer();
             }
             //while loop for player to select a Tile
-
         }
         //Ta no bloco de notas
+
+        //is responsible for keeping a loop until the input is valid 
+        //recieves tile because i can be the first or second selected tile
+        //console renders in here because its moving the cursor every
+        //while iteration
+        private Tile ValidInputLoop(Tile versaTile, string playerInput)
+        {
+            while (playerInput != "enter")
+            {
+                playerInput = input.DirectionalInput();
+
+                versaTile = SelectTile
+                (board.TileArray, playerInput, previousTile);
+
+                previousTile = versaTile;
+
+                consoleRenderer.RenderBoard(board.TileArray, versaTile);
+            }
+            playerInput = "";
+            return versaTile;
+        }  
+        
+        //is responsible selecting a tile according to input
+        private Tile SelectTile(Tile[,] board, string stringinput,
+        Tile currentTile)
+        {
+            if (stringinput == "left")
+            {
+                if (currentTile.TilePos.Column == 0)
+                    currentTile = board[currentTile.TilePos.Row, column -1];
+                else
+                currentTile = 
+                board[currentTile.TilePos.Row, currentTile.TilePos.Column -1];
+            }
+            else if (stringinput == "up")
+            { 
+                if (currentTile.TilePos.Row == 0)
+                    currentTile = board[row -1, currentTile.TilePos.Column];   
+                else
+                currentTile =
+                board[currentTile.TilePos.Row -1, currentTile.TilePos.Column]; 
+            }
+            else if (stringinput == "right")
+            {
+                if (currentTile.TilePos.Column == column -1)
+                    currentTile = board[currentTile.TilePos.Row, 0];
+                else
+                currentTile = 
+                board[currentTile.TilePos.Row, currentTile.TilePos.Column +1];
+            }
+            else if (stringinput == "down")
+            {
+                if (currentTile.TilePos.Row == row -1)
+                    currentTile = board[0, currentTile.TilePos.Column];
+                else
+                currentTile = 
+                board[currentTile.TilePos.Row +1, currentTile.TilePos.Column];
+            }
+            return currentTile;
+        }
     }
 }
