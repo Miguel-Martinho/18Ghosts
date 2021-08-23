@@ -6,16 +6,18 @@ namespace Ghosts.Common
 {
     public class GameHandler
     {
-        public IList<Ghost> Ghosts { get; private set; }
+        public IList<Ghost> P1Ghosts { get; private set; }
+        public IList<Ghost> P2Ghosts { get; private set; }
         public IList<Ghost> DungeonGhosts { get; private set; }
         public IList<Ghost> EscapedGhosts { get; private set; }
-        public byte player1wincount;
-        public byte player2wincount;
+        private byte player1wincount;
+        private byte player2wincount;
         public byte CurrentPlayer { get; private set; }
 
         public GameHandler()
         {
-            Ghosts = new List<Ghost>();
+            P1Ghosts = new List<Ghost>();
+            P2Ghosts = new List<Ghost>();
             DungeonGhosts = new List<Ghost>();
             EscapedGhosts = new List<Ghost>();
             CurrentPlayer = 1;
@@ -25,41 +27,64 @@ namespace Ghosts.Common
         public bool PlaceGhost(Tile tile)
         {
             Ghost tempGhost;
+            byte counter = 0;
+
             if (tile.TileType == TileType.Portal ||
-                tile.TileType == TileType.Mirror)
+                tile.TileType == TileType.Mirror || tile.IsEmpty == false)
                 return false;
+
+            else if(checkGhostList(tile) == false)
+                return false;
+
             else
             {
                 tempGhost = new Ghost(tile as CarpetTile, CurrentPlayer);
                 tile.ChangeState();
                 tile.AssignGhostToTile(tempGhost);
-                Ghosts.Add(tempGhost);
+
+                if (CurrentPlayer == 1)
+                    P1Ghosts.Add(tempGhost);
+                else 
+                    P2Ghosts.Add(tempGhost);
             }
             return true;
-                
         }
 
         public void ChangeCurrentPlayer()
         {
-            if (CurrentPlayer == 1) CurrentPlayer = 2;
+            if (CurrentPlayer == 1) 
+                CurrentPlayer = 2;
             else
                 CurrentPlayer = 1;
         }
 
         public void ReleaseGhost(Ghost ghost)
         {
-            Ghosts.Remove(ghost);
-            EscapedGhosts.Add(ghost);
+            if (ghost.Player == 1)
+            {
+                P1Ghosts.Remove(ghost);
+                player1wincount++;
+            }
+            else
+            {
+                P2Ghosts.Remove(ghost);
+                player2wincount++;
+            }   
+            Wincheck();
+            /*EscapedGhosts.Add(ghost); //WHY DO WE NEED THIS ?
             if (ghost.Player == 1)
                 player1wincount++;
             else
                 player2wincount++;
-            Wincheck();
+            */
         }
 
         public void KillGhost(Ghost ghost)
         {
-            Ghosts.Remove(ghost);
+            if (ghost.Player == 1)
+                P1Ghosts.Remove(ghost);
+            else
+                P2Ghosts.Remove(ghost);
             DungeonGhosts.Add(ghost);
         }
 
@@ -71,7 +96,10 @@ namespace Ghosts.Common
             {
                 DungeonGhosts.Remove(ghost);
                 ghost.ChangeOwner();
-                Ghosts.Add(ghost);
+                if (ghost.Player == 1)
+                    P1Ghosts.Add(ghost);
+                else
+                    P2Ghosts.Add(ghost);
                 return true;
             }
         }
@@ -118,6 +146,31 @@ namespace Ghosts.Common
             }
             else
                 return 0;
+        }
+
+        private bool checkGhostList(Tile tile)
+        {
+            byte counter = 0;
+            if (CurrentPlayer == 1)
+            {
+                foreach (Ghost ghost in P1Ghosts)
+                    if (ghost.Color == tile.Color)
+                        counter++;
+                    if (counter == 3)
+                        return false;
+                    else
+                        return true;
+            }
+            else
+            {
+                foreach (Ghost ghost in P2Ghosts)
+                    if (ghost.Color == tile.Color)
+                        counter++;
+                    if (counter == 3)
+                        return false;
+                    else
+                        return true;
+            }
         }
     }
 }
