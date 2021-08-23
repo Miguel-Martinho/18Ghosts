@@ -50,7 +50,8 @@ namespace ConsoleApp
 
         public void PlaceGhostErrorMsg()
         {
-            Console.WriteLine("Ghosts must be placed on Carpet Tiles");
+            Console.WriteLine("Ghosts must be placed on empty Carpet Tiles");
+            Console.WriteLine("Or you already have the max amount of Ghosts of that color");
         }
         
         public void PrintInputErrorMsg()

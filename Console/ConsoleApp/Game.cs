@@ -48,15 +48,7 @@ namespace ConsoleApp
             previousTile = board.TileArray[0, 0];
             consoleRenderer.RenderBoard(board.TileArray, previousTile);
 
-            //player 1 plays twice
-            //MISSING: if tile is invalid 
-            firstTile = ValidInputLoop(previousTile, playerInput);
-
-            if (game.PlaceGhost(firstTile) == false)
-            {
-                consoleRenderer.PlaceGhostErrorMsg();
-            }
-
+            //TODO: put limits on amount of ghosts of same color
             while (placingPhase == true)
             {
                 firstTile = ValidInputLoop(previousTile, playerInput);
@@ -67,6 +59,10 @@ namespace ConsoleApp
                 }
                 else
                     game.ChangeCurrentPlayer();
+                
+                if (game.P1Ghosts.Count + game.P2Ghosts.Count == 18)
+                    placingPhase = false;
+                    playingphase = true;
             }
 
             while (playingphase == true)
@@ -74,11 +70,23 @@ namespace ConsoleApp
                 firstTile = ValidInputLoop(previousTile, playerInput);
 
                 secondTile = ValidInputLoop(previousTile, playerInput);
+                
+                //checks the type of tile the ghost is moving to
+                //and defines ghost behaviour accordingly
+                if (secondTile.TileType == TileType.Carpet ||
+                secondTile.TileType == TileType.Mirror)
 
-                if (secondTile.IsEmpty == true)
-                    firstTile.Ghost.Movement(secondTile);
+                    if (secondTile.IsEmpty == true)
+                        firstTile.Ghost.Movement(secondTile);
+                    else
+                        game.Fight(firstTile.Ghost, secondTile.Ghost);
+
+                //LOOKOUT HERE: missing ghost un assign feature
                 else
-                    game.Fight(firstTile.Ghost, secondTile.Ghost);
+                    if (GetDirection(firstTile, secondTile) ==
+                    secondTile.Direction)
+
+                        game.ReleaseGhost(secondTile.Ghost);
 
                 game.ChangeCurrentPlayer();
             }
@@ -90,9 +98,11 @@ namespace ConsoleApp
         //recieves tile because i can be the first or second selected tile
         //console renders in here because its moving the cursor every
         //while iteration
+        //!!!!requiring to feed input variable into here feels wrong
+        //!!!! rendering here is very likely wrong
         private Tile ValidInputLoop(Tile versaTile, string playerInput)
         {
-            while (playerInput != "enter")
+            while (validInput != true)
             {
                 playerInput = input.DirectionalInput();
 
@@ -102,8 +112,12 @@ namespace ConsoleApp
                 previousTile = versaTile;
 
                 consoleRenderer.RenderBoard(board.TileArray, versaTile);
+                if (playerInput == "enter")
+                {
+                    playerInput = "";
+                    validInput = true;
+                } 
             }
-            playerInput = "";
             return versaTile;
         }  
         
@@ -144,6 +158,20 @@ namespace ConsoleApp
                 board[currentTile.TilePos.Row +1, currentTile.TilePos.Column];
             }
             return currentTile;
+        }
+
+        private PortalDirections GetDirection(Tile firstTile, Tile secondTile)
+        {
+            int xresult = secondTile.TilePos.Row - firstTile.TilePos.Row;
+            int yresult = secondTile.TilePos.Column - firstTile.TilePos.Column;
+            if (xresult == 1 && yresult == 0)
+                return PortalDirections.Up;
+            else if (xresult == 0 && yresult == 1)
+                return PortalDirections.Right;
+            else if (xresult == -1 && yresult == 0)
+                return PortalDirections.Down;
+            else 
+                return PortalDirections.Left;
         }
     }
 }
